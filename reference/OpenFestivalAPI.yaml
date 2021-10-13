@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: OpenFestivalAPI 2
+  title: OpenFestivalAPI 3
   version: '1.0'
   contact:
     name: maxim
