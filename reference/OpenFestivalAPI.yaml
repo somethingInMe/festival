@@ -1,6 +1,10 @@
+---
 swagger: "2.0"
 info:
-  description: "This is a marketplace of Elerance inc.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  description: "This is a marketplace of Elerance inc.  You can find out more about\
+    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
+    \ #swagger](http://swagger.io/irc/).      For this sample, you can use the api\
+    \ key `special-key` to test the authorization     filters."
   version: "1.0.0"
   title: "Elerance store"
   termsOfService: "http://swagger.io/terms/"
@@ -9,12 +13,7 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "store.elerance.keenetic.pro"
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
+host: "localhost:8080"
 basePath: "/api"
 tags:
 - name: "app"
@@ -59,12 +58,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/App"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-
   /apps/{id}:
     get:
       tags:
@@ -81,14 +80,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -101,61 +103,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []
-
-    # post:
-    #   tags:
-    #   - "app"
-    #   summary: "Update App by id"
-    #   description: "Update App by id"
-    #   operationId: "updateAppById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of app to update"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/App"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-
-    # delete:
-    #   tags:
-    #   - "app"
-    #   summary: "Delete App by id"
-    #   description: "Remove app from the store"
-    #   operationId: "deleteAppById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "Delete app by id"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "App not found"
-    #   security:
-    #     - Bearer: []
-        
   /developers:
     put:
       tags:
@@ -174,12 +121,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/Developer"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-        
   /developers/{id}:
     get:
       tags:
@@ -196,14 +143,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -216,67 +166,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []
-        
-    # post:
-    #   tags:
-    #   - "developers"
-    #   summary: "Update Developer by id"
-    #   description: "Update Developer by id"
-    #   operationId: "findDeveloperById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of developer to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   - in: "body"
-    #     name: "body"
-    #     description: "Developer object that needs to be added to the store"
-    #     required: true
-    #     schema:
-    #       $ref: "#/definitions/Developer"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/Developer"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-        
-    # delete:
-    #   tags:
-    #   - "developers"
-    #   summary: "Delete Developer by id"
-    #   description: "Multiple status values can be provided with comma separated strings"
-    #   operationId: "deletedevelopersById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of developer for delete"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "App not found"
-    #   security:
-    #     - Bearer: []
-       
   /downloads:
     put:
       tags:
@@ -295,12 +184,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/App"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-        
   /downloads/{id}:
     get:
       tags:
@@ -317,14 +206,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -337,61 +229,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []
-        
-    # post:
-    #   tags:
-    #   - "downloads"
-    #   summary: "Update Download by id"
-    #   description: "Update Download by id"
-    #   operationId: "ChangeDownloadById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of app to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/Download"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-        
-    # delete:
-    #   tags:
-    #   - "downloads"
-    #   summary: "Delete download  by id"
-    #   description: "Multiple status values can be provided with comma separated strings"
-    #   operationId: "deletedDownloadById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of download to download"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "App not found"
-    #   security:
-    #     - Bearer: []
-
   /login:
     post:
       tags:
@@ -399,30 +236,32 @@ paths:
       summary: "Login into application"
       description: "Login into application"
       consumes:
-      - "application/x-www-form-urlencoded" 
+      - "application/x-www-form-urlencoded"
       parameters:
       - name: "email"
         in: "formData"
         required: true
         type: "string"
+        x-exportParamName: "Email"
       - name: "password"
         in: "formData"
         required: true
         type: "string"
+        x-exportParamName: "Password"
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
                 description: "Response message"
               result:
-                type: object
+                type: "object"
                 properties:
                   token:
                     $ref: "#/definitions/Token"
@@ -430,7 +269,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-
   /logout:
     post:
       tags:
@@ -438,15 +276,16 @@ paths:
       summary: "Logout from application"
       description: "Logout from  application"
       consumes:
-      - "application/x-www-form-urlencoded" 
+      - "application/x-www-form-urlencoded"
+      parameters: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -455,7 +294,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-  
   /register:
     post:
       tags:
@@ -463,28 +301,31 @@ paths:
       summary: "Register new user"
       description: "Register new user"
       consumes:
-      - "application/x-www-form-urlencoded" 
+      - "application/x-www-form-urlencoded"
       parameters:
       - name: "name"
         in: "formData"
         required: true
         type: "string"
+        x-exportParamName: "Name"
       - name: "email"
         in: "formData"
         required: true
         type: "string"
+        x-exportParamName: "Email"
       - name: "password"
         in: "formData"
         required: true
         type: "string"
+        x-exportParamName: "Password"
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -493,8 +334,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-  
-
   /reviews:
     put:
       tags:
@@ -513,12 +352,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/Review"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-        
   /reviews/{id}:
     get:
       tags:
@@ -535,14 +374,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -555,61 +397,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []
-        
-    # post:
-    #   tags:
-    #   - "reviews"
-    #   summary: "Update Reviews by id"
-    #   description: "Update Reviews by id"
-    #   operationId: "ChangeReviewsById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of reviews to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/Review"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-        
-    # delete:
-    #   tags:
-    #   - "reviews"
-    #   summary: "Delete reviews by id"
-    #   description: "Multiple status values can be provided with comma separated strings"
-    #   operationId: "deletedReviewsById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of reviews to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "Reviews not found"
-    #   security:
-    #     - Bearer: []
-
   /roles:
     put:
       tags:
@@ -628,12 +415,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/Role"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-        
   /roles/{id}:
     get:
       tags:
@@ -650,14 +437,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -670,61 +460,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []
-        
-    # post:
-    #   tags:
-    #   - "roles"
-    #   summary: "Update Roles by id"
-    #   description: "Update Roles by id"
-    #   operationId: "ChangeRolesById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of roles to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/Role"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-        
-    # delete:
-    #   tags:
-    #   - "roles"
-    #   summary: "Delete roles by id"
-    #   description: "Multiple status values can be provided with comma separated strings"
-    #   operationId: "deletedRolesById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of roles to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "Reviews not found"
-    #   security:
-    #     - Bearer: []
-   
   /tags:
     put:
       tags:
@@ -743,12 +478,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/Role"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-        
   /tags/{id}:
     get:
       tags:
@@ -765,14 +500,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -785,61 +523,6 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []
-        
-    # post:
-    #   tags:
-    #   - "tags"
-    #   summary: "Update Tag by id"
-    #   description: "Update Tag by id"
-    #   operationId: "ChangeTagById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of tag to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/Tag"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-        
-    # delete:
-    #   tags:
-    #   - "tags"
-    #   summary: "Delete tag by id"
-    #   description: "Multiple status values can be provided with comma separated strings"
-    #   operationId: "deletedTagById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of roles to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "Reviews not found"
-    #   security:
-    #     - Bearer: []
-  
   /users:
     put:
       tags:
@@ -858,12 +541,12 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/User"
+        x-exportParamName: "Body"
+      security:
+      - Bearer: []
       responses:
         "405":
           description: "Invalid input"
-      security:
-        - Bearer: []
-        
   /user/{id}:
     get:
       tags:
@@ -880,14 +563,17 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        x-exportParamName: "Id"
+      security:
+      - Bearer: []
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: object
+            type: "object"
             properties:
               success:
-                type: boolean
+                type: "boolean"
                 description: "Success result"
               message:
                 type: "string"
@@ -900,59 +586,11 @@ paths:
           description: "Invalid status value"
         "404":
           description: "Not found"
-      security:
-        - Bearer: []      
-    # post:
-    #   tags:
-    #   - "users"
-    #   summary: "Update user by id"
-    #   description: "Update user by id"
-    #   operationId: "ChangeUserById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of user to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "200":
-    #       description: "successful operation"
-    #       schema:
-    #         type: "array"
-    #         items:
-    #           $ref: "#/definitions/User"
-    #     "400":
-    #       description: "Invalid status value"
-    #     "404":
-    #       description: "Not found"
-    #   security:
-    #     - Bearer: []
-        
-    # delete:
-    #   tags:
-    #   - "users"
-    #   summary: "Delete user by id"
-    #   description: "Multiple status values can be provided with comma separated strings"
-    #   operationId: "deletedUserById"
-    #   produces:
-    #   - "application/json"
-    #   parameters:
-    #   - name: "id"
-    #     in: "path"
-    #     description: "ID of user to return"
-    #     required: true
-    #     type: "integer"
-    #     format: "int64"
-    #   responses:
-    #     "400":
-    #       description: "Invalid id"
-    #     "404":
-    #       description: "Reviews not found"
-    #   security:
-    #     - Bearer: []  
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
 definitions:
   App:
     type: "object"
@@ -1025,9 +663,343 @@ definitions:
         format: "date-time"
     xml:
       name: "App"
-      
-  
-      
+    example:
+      code: "code"
+      statusWorking: "statusWorking"
+      developers_id: 6
+      description: "description"
+      backgroung:
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      tags:
+      - name: "name"
+        id: 7
+      - name: "name"
+        id: 7
+      reviews:
+      - apps_id: 1
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 1
+        rate: 6
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        id: 1
+        text: "text"
+      - apps_id: 1
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 1
+        rate: 6
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        id: 1
+        text: "text"
+      attachment:
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 9
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 9
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 6
+        original_name: "original_name"
+        name: "name"
+        pivot:
+        - attachment_id: 6
+          attachmentable_type: 3
+          attachmentable_id: 9
+        - attachment_id: 6
+          attachmentable_type: 3
+          attachmentable_id: 9
+        id: 5
+        hash: "hash"
+        group: 8
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 9
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 9
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 6
+        original_name: "original_name"
+        name: "name"
+        pivot:
+        - attachment_id: 6
+          attachmentable_type: 3
+          attachmentable_id: 9
+        - attachment_id: 6
+          attachmentable_type: 3
+          attachmentable_id: 9
+        id: 5
+        hash: "hash"
+        group: 8
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      downloads:
+      - apps_id: 4
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        users_id: 1
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        id: 7
+      - apps_id: 4
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        users_id: 1
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        id: 7
+      price: 9.301444
+      rights: "rights"
+      file_id: 3
+      name: "name"
+      logo:
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      withdrawn_at: "2000-01-23T04:56:07.000+00:00"
+      currency: "currency"
+      developer:
+      - updated_at: "2000-01-23T04:56:07.000+00:00"
+        background:
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        statusWorking: "statusWorking"
+        name: "name"
+        verified: 4
+        description: "description"
+        logo:
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        id: 2
+        status: "status"
+      - updated_at: "2000-01-23T04:56:07.000+00:00"
+        background:
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        statusWorking: "statusWorking"
+        name: "name"
+        verified: 4
+        description: "description"
+        logo:
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        - extension: "extension"
+          mime: "mime"
+          alt: "alt"
+          description: "description"
+          created_at: "2000-01-23T04:56:07.000+00:00"
+          sort: 5
+          relativeUrl: "relativeUrl"
+          url: "url"
+          path: "path"
+          disk: "disk"
+          size: 5
+          updated_at: "2000-01-23T04:56:07.000+00:00"
+          user_id: 2
+          original_name: "original_name"
+          name: "name"
+          id: 1
+          hash: "hash"
+          group: 7
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        id: 2
+        status: "status"
+      id: 0
+      published_at: "2000-01-23T04:56:07.000+00:00"
+      status: "status"
   Developer:
     type: "object"
     properties:
@@ -1060,8 +1032,90 @@ definitions:
         type: "string"
         format: "date-time"
     xml:
-      name: "Developer"  
- 
+      name: "Developer"
+    example:
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      background:
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      statusWorking: "statusWorking"
+      name: "name"
+      verified: 4
+      description: "description"
+      logo:
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      - extension: "extension"
+        mime: "mime"
+        alt: "alt"
+        description: "description"
+        created_at: "2000-01-23T04:56:07.000+00:00"
+        sort: 5
+        relativeUrl: "relativeUrl"
+        url: "url"
+        path: "path"
+        disk: "disk"
+        size: 5
+        updated_at: "2000-01-23T04:56:07.000+00:00"
+        user_id: 2
+        original_name: "original_name"
+        name: "name"
+        id: 1
+        hash: "hash"
+        group: 7
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      id: 2
+      status: "status"
   Attachment:
     type: "object"
     properties:
@@ -1113,8 +1167,33 @@ definitions:
         type: "string"
         format: "date-time"
     xml:
-      name: "Attachment"   
-
+      name: "Attachment"
+    example:
+      extension: "extension"
+      mime: "mime"
+      alt: "alt"
+      description: "description"
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      sort: 9
+      relativeUrl: "relativeUrl"
+      url: "url"
+      path: "path"
+      disk: "disk"
+      size: 9
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      user_id: 6
+      original_name: "original_name"
+      name: "name"
+      pivot:
+      - attachment_id: 6
+        attachmentable_type: 3
+        attachmentable_id: 9
+      - attachment_id: 6
+        attachmentable_type: 3
+        attachmentable_id: 9
+      id: 5
+      hash: "hash"
+      group: 8
   Download:
     type: "object"
     properties:
@@ -1134,8 +1213,13 @@ definitions:
         type: "string"
         format: "date-time"
     xml:
-      name: "Download"    
-  
+      name: "Download"
+    example:
+      apps_id: 4
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      users_id: 1
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      id: 7
   Logo:
     type: "object"
     properties:
@@ -1184,7 +1268,25 @@ definitions:
         format: "date-time"
     xml:
       name: "Logo"
-  
+    example:
+      extension: "extension"
+      mime: "mime"
+      alt: "alt"
+      description: "description"
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      sort: 5
+      relativeUrl: "relativeUrl"
+      url: "url"
+      path: "path"
+      disk: "disk"
+      size: 5
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      user_id: 2
+      original_name: "original_name"
+      name: "name"
+      id: 1
+      hash: "hash"
+      group: 7
   Pivot:
     type: "object"
     properties:
@@ -1199,7 +1301,10 @@ definitions:
         format: "int64"
     xml:
       name: "Pivot"
-  
+    example:
+      attachment_id: 6
+      attachmentable_type: 3
+      attachmentable_id: 9
   Review:
     type: "object"
     properties:
@@ -1225,7 +1330,14 @@ definitions:
         format: "date-time"
     xml:
       name: "Review"
-  
+    example:
+      apps_id: 1
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      user_id: 1
+      rate: 6
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      id: 1
+      text: "text"
   Role:
     type: "object"
     properties:
@@ -1246,8 +1358,14 @@ definitions:
         format: "date-time"
     xml:
       name: "Role"
-  
-  Tag:  
+    example:
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      permissions: "permissions"
+      name: "name"
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      id: 0
+      slug: "slug"
+  Tag:
     type: "object"
     properties:
       id:
@@ -1257,8 +1375,10 @@ definitions:
         type: "string"
     xml:
       name: "Tag"
-      
-  Token:  
+    example:
+      name: "name"
+      id: 7
+  Token:
     type: "object"
     properties:
       token:
@@ -1269,9 +1389,8 @@ definitions:
         type: "string"
         format: "date-time"
     xml:
-      name: "Token"     
-  
-  User:  
+      name: "Token"
+  User:
     type: "object"
     properties:
       id:
@@ -1299,7 +1418,18 @@ definitions:
         type: "string"
         format: "date-time"
     xml:
-      name: "User"          
+      name: "User"
+    example:
+      password: "password"
+      updated_at: "2000-01-23T04:56:07.000+00:00"
+      permissions: "permissions"
+      name: "name"
+      created_at: "2000-01-23T04:56:07.000+00:00"
+      email_verified_at: "2000-01-23T04:56:07.000+00:00"
+      id: 0
+      login: "login"
+      remember_token: "remember_token"
+      email: "email"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
