@@ -1,5 +1,6 @@
 swagger: '2.0'
 info:
+
   description: ОПИСАНИЕ!!!1
   version: 1.0.0
   title: Elerance store
@@ -36,7 +37,7 @@ schemes:
   - https
   - http
 paths:
-  /apps:
+  /pet:
     put:
       tags:
         - app
